@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Betting App</title>
+  </head>
+  <body>
+
+    <div class="jumbotron">
+      <div class="row">
+
+        <div class="col">
+
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Welcome, Vic</h5>
+              <!-- Welcome $USER.NAME$ -->
+              <h6 class="card-subtitle mb-2 text-muted">User info below</h6>
+              <p class="card-text">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <!-- <th scope="row">1</th> -->
+                      <td>Money Availible:</td>
+                      <td>$5,200</td>
+                      <!--$USER.MONEY$-->
+                    </tr>
+                    <tr>
+                      <!-- <th scope="row">2</th> -->
+                      <td>Total Bets Created:</td>
+                      <td>21</td>
+                      <!--$USER.BOOKIE_BETS.COUNT$-->
+
+                    </tr>
+                    <tr>
+                      <!-- <th scope="row">3</th> -->
+                      <td>Total Bets Accepted:</td>
+                      <td>35</td>
+                      <!--$USER.BETTER_BETS.COUNT$  -->
+                    </tr>
+                  </tbody>
+                </table>
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-6">
+          <div class="card" style="width: 34rem;">
+            <div class="card-body">
+              <h5 class="card-title">Availible Bets</h5>
+              <!-- Welcome $USER.NAME$ -->
+              <h6 class="card-subtitle mb-2 text-muted">See availible bets below</h6>
+              <p class="card-text">
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Category</th>
+                      <th scope="col">Bookie</th>
+                      <th scope="col">Bet Amount</th>
+                      <th scope="col">Due In</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+                    <td>Office</td>
+                    <td>Mark</td>
+                    <td>$20</td>
+                    <td>48hours</td>
+                    <td>
+                      <p>
+                        <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#OfficeMark20" aria-expanded="false" aria-controls="OfficeMark20">
+                          See Details
+                        </button>
+                      </p>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <div class="collapse" id="OfficeMark20">
+                      <div class="card card-body">
+                        <p>Will y happen by 12:am on January 15th, 2018?</p>
+                        <p>Mark is willing to bet $20 that it will not.</p>
+                        <hr>
+                        <p>Would you like to bet $20 that it will?</p>
+                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Enter Bet</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                ...
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </tr>
+                    <tr>
+                      <td>Politics</td>
+                      <td>Susy</td>
+                      <td>$50</td>
+                      <td>72hours</td>
+                      <td>
+                        <p>
+                          <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#PoliticsSusy50" aria-expanded="false" aria-controls="PoliticsSusy50">
+                            See Details
+                          </button>
+                        </p>
+                      </td>
+
+                    </tr>
+
+                    <tr>
+                      <div class="collapse" id="PoliticsSusy50">
+                        <div class="card card-body">
+                          <p>Will z happen by 12:30am on February 8th, 2018?</p>
+                          <p>Susy is willing to bet $50 that it will not.</p>
+                          <hr>
+                          <p>Would you like to bet $50 that it will?</p>
+                          <button class="btn btn-primary" type="submit">Enter Bet</button>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col">
+          Engaged Bets
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script src="index.js"></script>
+  </body>
+</html>
