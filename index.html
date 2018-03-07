@@ -17,25 +17,25 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Welcome, Vic</h5>
+              <h5 id="user_name" class="card-title">Welcome, Vic</h5>
               <!-- Welcome $USER.NAME$ -->
-              <h6 class="card-subtitle mb-2 text-muted">User info below</h6>
+              <h6 class="card-subtitle mb-2 text-muted"></h6>
               <p class="card-text">
                 <table class="table">
                   <tbody>
                     <tr>
                       <td>Money Availible:</td>
-                      <td>$5,200</td>
+                      <td id="user_money">$5,200</td>
                       <!--$USER.MONEY$-->
                     </tr>
                     <tr>
                       <td>Total Bets Created:</td>
-                      <td>21</td>
+                      <td id="create_bets"></td>
                       <!--$USER.BOOKIE_BETS.COUNT$-->
                     </tr>
                     <tr>
                       <td>Total Bets Accepted:</td>
-                      <td>35</td>
+                      <td id= "accepted_bets"></td>
                       <!--$USER.BETTER_BETS.COUNT$  -->
                     </tr>
                   </tbody>
@@ -93,18 +93,24 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Availible Bets</h5>
+<<<<<<< HEAD
               <h6 class="card-subtitle mb-2 text-muted">See availible bets below</h6>
+=======
+              <!-- Welcome $USER.NAME$ -->
+
+>>>>>>> 2d1d3d0c9a9a6e459c137e0210f79f1b5fabb269
               <p class="card-text">
                 <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">Category</th>
                       <th scope="col">Bookie</th>
-                      <th scope="col">Bet Amount</th>
+                      <th scope="col">Bet</th>
                       <th scope="col">Due In</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
+<<<<<<< HEAD
                   <tbody>
 
                   <tr>
@@ -493,6 +499,11 @@
 
                   </tr>
 
+=======
+                  <tbody id= "show_bets">
+
+                  
+>>>>>>> 2d1d3d0c9a9a6e459c137e0210f79f1b5fabb269
                   </tbody>
                 </table>
 
