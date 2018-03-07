@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Betting App</title>
+  </head>
+  <body>
+
+    <div class="jumbotron">
+      <div class="row">
+
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" id="welcomeUser">Welcome, Vic</h5>
+              <h6 class="card-subtitle mb-2 text-muted">User info below</h6>
+              <p class="card-text">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Money Availible:</td>
+                      <td id="moneyAvail">$5,200</td>
+                    </tr>
+                    <tr>
+                      <td>Total Bets Created:</td>
+                      <td id="betsCreateCount">21</td>
+                    </tr>
+                    <tr>
+                      <td>Total Bets Accepted:</td>
+                      <td id="betsAccCount">35</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </p>
+              <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Create a New Bet
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card" style="width: 20rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Create New Bet</h5>
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Category:</label>
+                        <input type="text" class="form-control" id="categoryText" aria-describedby="categoryText" placeholder="Enter category">
+                      </div>
+                      <div class="form-group">
+                        <label for="descriptionText">The Bet:</label>
+                        <textarea class="form-control" id="descriptionText" rows="3" placeholder="Enter bet"></textarea>
+                        <small id="descriptionHelp" class="form-text text-muted">Give a true or false prediction. Ex. "The fire alarm will go off by 11am today."</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="betAmount">Amount to Bet:</label>
+                        <input type="number" class="form-control" id="betAmount" placeholder="ex. $54.36">
+                        <small id="betAmountHelp" class="form-text text-muted">Enter the amount of money you're willing to bet.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="dueDate">Bet Expires On:</label>
+                        <input type="datetime-local" class="form-control" id="dueDate" placeholder="ex. $54.36">
+                        <small id="dueDateHelp" class="form-text text-muted">Enter the date that the bet will expire by.</small>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Availible Bets</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bets I'm In</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Bookie</th>
+                          <th scope="col">Bet</th>
+                          <th scope="col">Bet Amount</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Mark</td>
+                          <td>Flatiron will close tomorrow due to Snow Storm.</td>
+                          <td>$20</td>
+                          <td>
+                            <p>
+                              <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#OfficeMark20" aria-expanded="false" aria-controls="OfficeMark20">
+                                See Details
+                              </button>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <div class="collapse" id="OfficeMark20">
+                            <div class="card card-body">
+                              <p><strong>Mark is betting $20 that:</strong></p>
+                              <h6>Flatiron will close tomorrow due to Snow Storm.</h6>
+                              <hr>
+                              <p>Would you like to bet <strong>$20</strong> against that?</p>
+                              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Enter Bet</button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Commit to bet?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Would you like to bet $20 that the condition will not happen?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                                      <button type="button" class="btn btn-primary">Bet $10</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                        <tr>
+                          <td>Susy</td>
+                          <td>Get Out will win an Oscar.</td>
+                          <td>$50</td>
+                          <td>
+                            <p>
+                              <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#PoliticsSusy50" aria-expanded="false" aria-controls="PoliticsSusy50">
+                                See Details
+                              </button>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <div class="collapse" id="PoliticsSusy50">
+                            <div class="card card-body">
+                              <p><strong>Susy is betting $20 that:</strong></p>
+                              <h6>Get Out will win an Oscar.</h6>
+                              <hr>
+                              <p>Would you like to bet <strong>$50</strong> against that?</p>
+                              <button class="btn btn-primary" type="submit">Enter Bet</button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      ...
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Engaged With</th>
+                        <th scope="col">Bet</th>
+                        <th scope="col">Bet Amount</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="betsIn">
+                      <tr>
+                        <td>Mark</td>
+                        <td>Flatiron will close due to Snow Storm.</td>
+                        <td>$20</td>
+                        <td>
+                          <p>
+                            <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#InOfficeMark20" aria-expanded="false" aria-controls="InOfficeMark20">
+                              Resolve Bet
+                            </button>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <div class="collapse" id="InOfficeMark20">
+                          <div class="card card-body">
+                            <p>Mark bet $20 that:</p>
+                            <p>Flatiron would close due to the snow storm.</p>
+                            <hr>
+                            <p>Were they right?</p>
+                            <button class="btn btn-primary" type="button">Yes, they were right.</button>
+                            <button class="btn btn-danger" type="button">No, I was right.</button>
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Commit to bet?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Would you like to bet $10 that the condition will not happen?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                                    <button type="button" class="btn btn-primary">Bet $10</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+                          </div>
+                        </div>
+                      </tr>
+                      <tr>
+                        <td>Susy</td>
+                        <td>Get Out will win an Oscar.</td>
+                        <td>$50</td>
+                        <td>
+                          <p>
+                            <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#InPoliticsSusy50" aria-expanded="false" aria-controls="InPoliticsSusy50">
+                              Resolve Bet
+                            </button>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <div class="collapse" id="InPoliticsSusy50">
+                          <div class="card card-body">
+                            <p>Susy bet $50 that:</p>
+                            <p>Get Out will win an Oscar.</p>
+                            <hr>
+                            <p>Were they right?</p>
+                            <button class="btn btn-primary" type="button">Yes, they were right.</button>
+                            <button class="btn btn-danger" type="button">No, I was right.</button>
+                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    ...
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="src/index.js"></script>
+    <script src="src/user.js"></script>
+    
+  </body>
+</html>

@@ -94,4 +94,7 @@ function renderbets(betsData){
     show_bets.innerHTML+= string
   }
 
+
+
+
 }
