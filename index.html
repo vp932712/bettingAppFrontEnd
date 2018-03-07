@@ -9,9 +9,38 @@
     <title>Betting App</title>
   </head>
   <body>
-
     <div class="jumbotron">
       <div class="row">
+
+        <!-- LOGIN MODAL  -->
+
+        <div id="loginModal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Login with your username</h5>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <form id="loginForm">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Login Name</label>
+                      <input type="text" class="form-control" id="loginName" aria-describedby="loginHelp" placeholder="User name">
+                      <small id="loginHelp" class="form-text text-muted">Login with the name you signed up with.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </form>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- END LOGIN MODAL -->
+
+
+
+
 
         <div class="col-4">
           <div class="card">
@@ -137,7 +166,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="src/index.js"></script>
+    <script src="src/login.js"></script>
     <script src="src/user.js"></script>
     <script src="src/bets.js"></script>
 

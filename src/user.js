@@ -1,5 +1,6 @@
 class User{
-  constructor({id, name, money, better_bets, bookie_bets}){
+  constructor({name, id, money, better_bets, bookie_bets}){
+
     // JSON elements
     this.name = name
     this.id = id
@@ -12,9 +13,7 @@ class User{
     this.availMoneyField = document.getElementById("moneyAvail")
     this.betsCreatedField = document.getElementById("betsCreateCount")
     this.betsAcceptedField = document.getElementById("betsAccCount")
-
     this.betsInTable = document.getElementById("betsIn")
-
   }
 
   renderUserInfo(){
@@ -115,39 +114,5 @@ class User{
       this.betsInTable.innerHTML += betRow
     }
   }
-
-
-
-
-
-
-
-
-
-
-  // consoleUser(){
-  //   console.log(this.name);
-  //   console.log(this.id);
-  //   console.log(this.money);
-  //   console.log(this.better_bets);
-  //   console.log(this.bookie_bets);
-  //   console.log(this.userWelcomeField);
-  //
-  //   console.log(this.availMoneyField);
-  //   console.log(this.betsCreatedField);
-  //   console.log(this.betsAcceptedField);
-  //
-  //   console.log(this.betsInTable);
-  //   this.renderUserInfo()
-  //   this.renderBetsIn()
-  // }
-
-
-
-
-
-
-
-
-
+  
 }
