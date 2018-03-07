@@ -13,8 +13,6 @@
     <div class="jumbotron">
       <div class="row">
 
-        <!-- <div class="col-1"></div> -->
-
         <div class="col-4">
 
           <div class="card">
@@ -91,8 +89,6 @@
           </div>
         </div>
 
-
-
         <div class="col-6">
           <div class="card">
             <div class="card-body">
@@ -126,8 +122,6 @@
                   </tr>
 
                   <tr>
-
-                    <!-- Collapsabile Item -->
                     <div class="collapse" id="OfficeMark20">
                       <div class="card card-body">
                         <p>Will y happen by 12:am on January 15th, 2018?</p>
@@ -160,8 +154,6 @@
 
                       </div>
                     </div>
-                    <!-- End Collapsible Item -->
-
                   </tr>
 
                   <tr>
@@ -225,18 +217,157 @@
           </div>
         </div>
 
-        <!-- <div class="col-1"></div> -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Availible Bets</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bets I'm In</a>
+          </li>
+
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <p class="card-text">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Bookie</th>
+                    <th scope="col">Bet Amount</th>
+                    <th scope="col">Due In</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                  <td>Office</td>
+                  <td>Mark</td>
+                  <td>$20</td>
+                  <td>48hours</td>
+                  <td>
+                    <p>
+                      <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#OfficeMark20" aria-expanded="false" aria-controls="OfficeMark20">
+                        See Details
+                      </button>
+                    </p>
+                  </td>
+                </tr>
+
+                <tr>
+
+                  <!-- Collapsabile Item -->
+                  <div class="collapse" id="OfficeMark20">
+                    <div class="card card-body">
+                      <p>Will y happen by 12:am on January 15th, 2018?</p>
+                      <p>Mark is willing to bet $20 that it will not.</p>
+                      <hr>
+                      <p>Would you like to bet $20 that it will?</p>
+                      <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Enter Bet</button>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Commit to bet?</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Would you like to bet $10 that the condition will not happen?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                              <button type="button" class="btn btn-primary">Bet $10</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Modal -->
+
+                    </div>
+                  </div>
+                  <!-- End Collapsible Item -->
+
+                </tr>
+
+                <tr>
+                  <td>Politics</td>
+                  <td>Susy</td>
+                  <td>$50</td>
+                  <td>72hours</td>
+                  <td>
+                    <p>
+                      <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#PoliticsSusy50" aria-expanded="false" aria-controls="PoliticsSusy50">
+                        See Details
+                      </button>
+                    </p>
+                  </td>
+
+                </tr>
+
+                <tr>
+
+                  <!-- Collapsabile Item -->
+                  <div class="collapse" id="PoliticsSusy50">
+                    <div class="card card-body">
+                      <p>Will z happen by 12:30am on February 8th, 2018?</p>
+                      <p>Susy is willing to bet $50 that it will not.</p>
+                      <hr>
+                      <p>Would you like to bet $50 that it will?</p>
+                      <button class="btn btn-primary" type="submit">Enter Bet</button>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              ...
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Modal -->
+
+                    </div>
+                  </div>
+                  <!-- End Collapsible Item -->
+
+                </tr>
+
+                </tbody>
+              </table>
+            </p>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+            ...
+
+          </div>
+
+        </div>
 
 
 
       </div>
-      <div class="row">
-        <hr>
-      </div>
 
 
-      <div class="row">
-        <div class="col-4"></div>
         <div class="col-6">
           <div class="card">
             <div class="card-body">
@@ -371,7 +502,7 @@
             </div>
           </div>
         </div>
-      </div>
+
     </div>
 
 
