@@ -13,25 +13,34 @@
     <div class="jumbotron">
       <div class="row">
 
-        <div class="col-4">
-          <div class="card">
+        <div class="col">
+
+          <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Welcome, Vic</h5>
-              <h6 class="card-subtitle mb-2 text-muted">User info below</h6>
+              <h5 id="user_name" class="card-title"></h5>
+              <!-- Welcome $USER.NAME$ -->
+              <h6 class="card-subtitle mb-2 text-muted"></h6>
               <p class="card-text">
                 <table class="table">
                   <tbody>
                     <tr>
+                      <!-- <th scope="row">1</th> -->
                       <td>Money Availible:</td>
-                      <td>$5,200</td>
+                      <td id="user_money"></td>
+                      <!--$USER.MONEY$-->
                     </tr>
                     <tr>
+                      <!-- <th scope="row">2</th> -->
                       <td>Total Bets Created:</td>
-                      <td>21</td>
+                      <td id="create_bets"></td>
+                      <!--$USER.BOOKIE_BETS.COUNT$-->
+
                     </tr>
                     <tr>
+                      <!-- <th scope="row">3</th> -->
                       <td>Total Bets Accepted:</td>
-                      <td>35</td>
+                      <td id= "accepted_bets"></td>
+                      <!--$USER.BETTER_BETS.COUNT$  -->
                     </tr>
                   </tbody>
                 </table>
@@ -91,101 +100,20 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Bookie</th>
-                          <th scope="col">Bet</th>
-                          <th scope="col">Bet Amount</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Mark</td>
-                          <td>Flatiron will close tomorrow due to Snow Storm.</td>
-                          <td>$20</td>
-                          <td>
-                            <p>
-                              <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#OfficeMark20" aria-expanded="false" aria-controls="OfficeMark20">
-                                See Details
-                              </button>
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <div class="collapse" id="OfficeMark20">
-                            <div class="card card-body">
-                              <p><strong>Mark is betting $20 that:</strong></p>
-                              <h6>Flatiron will close tomorrow due to Snow Storm.</h6>
-                              <hr>
-                              <p>Would you like to bet <strong>$20</strong> against that?</p>
-                              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Enter Bet</button>
-                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Commit to bet?</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      Would you like to bet $20 that the condition will not happen?
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
-                                      <button type="button" class="btn btn-primary">Bet $10</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </tr>
-                        <tr>
-                          <td>Susy</td>
-                          <td>Get Out will win an Oscar.</td>
-                          <td>$50</td>
-                          <td>
-                            <p>
-                              <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#PoliticsSusy50" aria-expanded="false" aria-controls="PoliticsSusy50">
-                                See Details
-                              </button>
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <div class="collapse" id="PoliticsSusy50">
-                            <div class="card card-body">
-                              <p><strong>Susy is betting $20 that:</strong></p>
-                              <h6>Get Out will win an Oscar.</h6>
-                              <hr>
-                              <p>Would you like to bet <strong>$50</strong> against that?</p>
-                              <button class="btn btn-primary" type="submit">Enter Bet</button>
-                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      ...
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Category</th>
+                      <th scope="col">Bookie</th>
+                      <th scope="col">Bet</th>
+                      <th scope="col">Due In</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody id= "show_bets">
+
+
+                  </tbody>
+                </table>
                   </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   <table class="table">

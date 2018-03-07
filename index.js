@@ -8,44 +8,45 @@ let accepted_bets = document.getElementById("accepted_bets")
 let show_bets = document.getElementById("show_bets")
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
- fetched(url)
- fetchBets(betUrl)
+  fetched(url)
+  fetchBets(betUrl)
+  
 })
 
 
-function fetched(url){
+function fetched(url) {
   fetch(url)
-  .then(res=> res.json())
-  .then(json=> render(json))
+    .then(res => res.json())
+    .then(json => render(json))
 }
 
-function fetchBets(betUrl){
+function fetchBets(betUrl) {
   fetch(betUrl)
-  .then(res=> res.json())
-  .then(json=> renderbets(json))
+    .then(res => res.json())
+    .then(json => renderbets(json))
 }
 
-function render(userData){
+function render(userData) {
   // console.log(userData.bookie_bets.length)
-   user_name.innerHTML = `Welcome! ${userData.name}`
-   user_money.innerHTML = `$${userData.money}`
-   create_bets.innerHTML = userData.bookie_bets.length
-   accepted_bets.innerHTML = userData.better_bets.length
+  user_name.innerHTML = `Welcome! ${userData.name}`
+  user_money.innerHTML = `$${userData.money}`
+  create_bets.innerHTML = userData.bookie_bets.length
+  accepted_bets.innerHTML = userData.better_bets.length
 }
 
 
-function renderbets(betsData){
+function renderbets(betsData) {
   console.log(betsData)
-  for(let i = 0; i < betsData.length; i++){
+  for (let i = 0; i < betsData.length; i++) {
     let category = betsData[i].category
     let bookie = betsData[i].bookie.name
     let bet_amount = betsData[i].bet_amount
     let bet_id = betsData[i].id
     let description = betsData[i].description
 
-    let string =  `<tr>
+    let string = `<tr>
       <td>${category}</td>
       <td>${bookie}</td>
       <td>$${bet_amount}</td>
@@ -91,7 +92,7 @@ function renderbets(betsData){
         </div>
       </div>
     </tr>`
-    show_bets.innerHTML+= string
+    show_bets.innerHTML += string
   }
 
 }
