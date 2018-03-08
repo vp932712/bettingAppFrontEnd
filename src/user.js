@@ -32,7 +32,6 @@ class User{
       .then(json=>this.renderBetsIn(json))
   }
 
-
   addEventListener(){
     this.createBetForm.addEventListener('submit', (event)=>{
       event.preventDefault()
