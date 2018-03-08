@@ -14,8 +14,10 @@ class User{
     this.betsAcceptedField = document.getElementById("betsAccCount")
     this.betsInTable = document.getElementById("betsIn")
     this.createBetForm = document.getElementById("createBet")
+    this.addMoney = document.getElementById("addMoney")
     this.betsAvailTable = document.getElementById("betsAvail")
     this.addEventListener();
+    this.addMoneyListener();
 
   }
 
@@ -44,6 +46,32 @@ class User{
       this.postToDB(category, bet, bet_amount)
     })
   }
+
+  addMoneyListener(){
+    this.addMoney.addEventListener('submit', (event)=>{
+      event.preventDefault()
+      let amount = (event.target.elements[0].value)
+      this.addMoneyAccount(amount, this.money)
+    })
+  }
+
+addMoneyAccount(amount, current_amount){
+  let total = parseInt(amount)+ current_amount
+  let userOption = {
+    method:"PATCH",
+    headers:{
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify({"user":{"money": total }})
+  }
+
+  fetch(`http://localhost:3000/users/${this.id}`, userOption)
+
+
+}
+
+
 
   renderBets(betsData) {
     this.betsAvailTable.innerHTML = ""
