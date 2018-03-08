@@ -266,7 +266,7 @@ class User{
       let winningAmount = json.bet_amount*2*(0.9)*(0.9125)
 
 
-      console.log(final_winner);
+
 
 
       let options = {
