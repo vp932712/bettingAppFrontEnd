@@ -98,9 +98,9 @@ class User{
   enterBet(bet_number) {
     let bet_amount = bet_number[1]
     let bet_id = bet_number[0]
-
+    let amount;
     if(bet_amount < this.money) {
-      let amount = this.money - bet_amount
+      amount = this.money - bet_amount
       let options = {
         method: "PATCH",
         headers: {
@@ -114,6 +114,7 @@ class User{
         })
       }
       let userOption = {
+        
         method: "PATCH",
         headers: {
           "Accept": "application/json",
