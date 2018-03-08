@@ -69,11 +69,15 @@
                 </table>
               </p>
               <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-primary" data-toggle="collapse" href="#createBet" aria-expanded="false" aria-controls="createBet">
                   Create a New Bet
                 </a>
+                <a class="btn btn-primary" data-toggle="collapse" href="#addMoney" aria-expanded="false" aria-controls="addMoney">
+                  Add Money
+                </a>
               </p>
-              <div class="collapse" id="collapseExample">
+
+              <div class="collapse" id="createBet">
                 <div class="card" style="width: 20rem;">
                   <div class="card-body">
                     <h5 class="card-title">Create New Bet</h5>
@@ -98,6 +102,25 @@
                   </div>
                 </div>
               </div>
+
+              <div class="collapse" id="addMoney">
+                <div class="card" style="width: 20rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Add Money</h5>
+                    <form id="addMoney">
+                      <div class="form-group">
+                        <label for="betAmount">Amount to Add:</label>
+                        <input type="number" class="form-control" id="moneyAmount" placeholder="ex. $54.36">
+                        <small id="addMoneyHelp" class="form-text text-muted">Enter the amount of money you'd like to add to your account.</small>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Add Money</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>

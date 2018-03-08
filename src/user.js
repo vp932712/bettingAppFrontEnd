@@ -16,6 +16,7 @@ class User{
     this.createBetForm = document.getElementById("createBet")
     this.betsAvailTable = document.getElementById("betsAvail")
     this.addEventListener();
+
   }
 
   renderUserInfo(){
@@ -42,8 +43,6 @@ class User{
 
       this.postToDB(category, bet, bet_amount)
     })
-
-
   }
 
   renderBets(betsData) {
@@ -114,7 +113,7 @@ class User{
         })
       }
       let userOption = {
-        
+
         method: "PATCH",
         headers: {
           "Accept": "application/json",

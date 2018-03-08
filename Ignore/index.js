@@ -9,10 +9,8 @@ let show_bets = document.getElementById("show_bets")
 
 
 document.addEventListener("DOMContentLoaded", () => {
-
   fetched(url)
   fetchBets(betUrl)
-  
 })
 
 
