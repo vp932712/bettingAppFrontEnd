@@ -22,21 +22,26 @@ class User{
     this.allBetsURL = 'http://localhost:3000/bets'
     this.userUrl = (user_id)=>{return `http://localhost:3000/users/${user_id}`}
     this.betUrl = (bet_id)=>{return `http://localhost:3000/bets/${bet_id}`}
-
   }
 
-  fetchData(){
+
+// Fetch User and Bets data
+  fetchUserData(){
     fetch(`http://localhost:3000/users`)
       .then(res=>res.json())
-      .then(json=>this.parseAndPopulate(json))
+      .then(json=>this.parseAndPopulateUser(json))
   }
 
-  parseAndPopulate(json){
+  fetchBetsData(){
+    fetch(`http://localhost:3000/bets`)
+      .then(res=>res.json())
+      .then(json=>this.renderBetsAvail(json))
+  }
+// End
+
+  parseAndPopulateUser(json){
     // Fills in user info box
     this.renderUserInfo();
-
-    // Fills in Bets Availible table
-    this.renderBetsAvail();
 
     // Fills in Bets Engaged in table
     this.renderBetsEngage();
@@ -48,10 +53,10 @@ class User{
     this.betsCreatedField.innerText = `${this.bookie_bets.length}`
     this.betsAcceptedField.innerText = `${this.better_bets.length}`
 
-    this.addCreateAndAddListeners();
+    this.addUserFormListeners();
   }
 
-  addCreateAndAddListeners(){
+  addUserFormListeners(){
     // Adds the Create Bet listener
     this.createBetForm.addEventListener('submit', (event)=>{
       event.preventDefault();
@@ -64,7 +69,7 @@ class User{
       // let bet = event.target.elements[1].value
       // let bet_amount = event.target.elements[2].value
 
-      this.postToDB("POST", respObj)
+      this.postBetToDB(respObj)
     })
 
     // Adds the Add Money listener
@@ -72,79 +77,50 @@ class User{
       event.preventDefault();
 
       let respObj = {"addAmount": event.target.elements[0].value}
-
       // let addAmount = event.target.elements[0].value
-
-      this.postToDb("PATCH", respObj)
+      this.patchAddMoneyToDb(respObj)
     })
 
   }
 
 
-  postToDB(method, {category, bet, bet_amount, addAmount}){
-
-
-
-    let options = {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        "category": category,
-        "description": bet,
-        "bet_amount": bet_amount,
-        "bookie_id": this.id
-      })
-    }
-
-    fetch(`http://localhost:3000/bets`, options)
-    // fetch(`http://localhost:3000/users`)
-    //   .then(res=>res.json())
-    //   .then(json=>findUser(json, this.name)) ask johan about this !!!
-
-  }
-
-
-
-
-
-  renderBets(betsData) {
+  renderBetsAvail(allBets) {
     this.betsAvailTable.innerHTML = ""
 
       for (let i = 0; i < betsData.length; i++) {
-        let bet = betsData[i]
+        let bet = allBets[i]
 
         if (bet.better == null && bet.bookie_id != this.id) {
-          // let category = betsData[i].category
-          let bookie = betsData[i].bookie.name
-          let bet_amount = betsData[i].bet_amount
-          let bet_id = betsData[i].id
-          let description = betsData[i].description
-          let string = `<tr>
-          <td>${bookie}</td>
-          <td>${description}</td>
-          <td>$${bet_amount}</td>
-          <td>
-            <p>
-              <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#${bet_id}a" aria-expanded="false" aria-controls="${bet_id}a">
-                See Details
-              </button>
-            </p>
-          </td>
-        </tr>
-      <tr>
-          <div class="collapse" id="${bet_id}a">
-            <div class="card card-body">
-              <p>${description}</p>
-              <p>${bookie} is willing to accept a bet of ${bet_amount}</p>
-              <hr>
-              <p>Would you like to bet $${bet_amount}?</p>
-              <button class="btn btn-primary enter-bet"  value= "${bet_id},${bet_amount}"type="button" data-toggle="modal" data-target="#${bet_id}b">Enter Bet</button>
-      </div>
-          </div>
-        </tr>`
+          let bookie = bet.bookie.name
+          let bet_amount = bet.bet_amount
+          let bet_id = bet.id
+          let description = bet.description
+
+          let string =
+          `<tr>
+            <td>${bookie}</td>
+            <td>${description}</td>
+            <td>$${bet_amount}</td>
+            <td>
+              <p>
+                <button class="btn btn-primary bet-detail" type="button" data-toggle="collapse" data-target="#${bet_id}a" aria-expanded="false" aria-controls="${bet_id}a">
+                  See Details
+                </button>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <div class="collapse" id="${bet_id}a">
+              <div class="card card-body">
+                <p>${description}</p>
+                <p>${bookie} is willing to accept a bet of ${bet_amount}</p>
+                <hr>
+                <p>Would you like to bet $${bet_amount}?</p>
+                <button class="btn btn-primary enter-bet"  value= "${bet_id},${bet_amount}"type="button" data-toggle="modal" data-target="#${bet_id}b">Enter Bet</button>
+              </div>
+            </div>
+          </tr>`
+
           this.betsAvailTable.innerHTML += string
         }
     this.addEnterBetListener()
@@ -152,8 +128,9 @@ class User{
   }
 
   addEnterBetListener() {
-    let betButton = document.querySelectorAll("button.btn.btn-primary.enter-bet")
-    for (var i = 0; i < betButton.length; i++) {
+    let enterBetButton = document.querySelectorAll("button.btn.btn-primary.enter-bet");
+
+    for (var i = 0; i < enterBetButton.length; i++) {
       let item = betButton[i]
       item.addEventListener("click", (e) => {
         let bet_number = e.target.value.split(",")
@@ -385,11 +362,12 @@ winner(json, winningAmount){
 
 
 
-  postToDB({category, bet, bet_amount, addAmount}){
 
+// POST AND PATCH METHODS
 
+  postBetToDB({category, bet, bet_amount}){
     let options = {
-      method: "POST",
+      method: method,
       headers:{
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -406,7 +384,23 @@ winner(json, winningAmount){
     // fetch(`http://localhost:3000/users`)
     //   .then(res=>res.json())
     //   .then(json=>findUser(json, this.name)) ask johan about this !!!
+  }
 
+  patchAddMoneyToDb({add_amount}){
+    let new_amount = this.money + add_amount;
+
+    let options = {
+      method: method,
+      headers:{
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "money": new_amount
+      })
+    }
+
+    fetch(`http://localhost:3000/users/${this.id}`, options)
   }
 
 }

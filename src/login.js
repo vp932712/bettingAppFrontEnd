@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
       let user = new User(userObj)
 
-      user.fetchData();
+      user.fetchUserData();
+      user.fetchBetsData();
 
 
     }else{
