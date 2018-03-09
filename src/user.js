@@ -25,7 +25,7 @@ class User{
   }
 
 
-// Fetch User and Bets data
+  // Fetch User and Bets data
   fetchUserData(){
     fetch(`http://localhost:3000/users`)
       .then(res=>res.json())
@@ -37,14 +37,14 @@ class User{
       .then(res=>res.json())
       .then(json=>this.renderBetsAvail(json))
   }
-// End
+  // End
 
   parseAndPopulateUser(json){
     // Fills in user info box
     this.renderUserInfo();
 
     // Fills in Bets Engaged in table
-    this.renderBetsEngage();
+    this.renderBetsEngage(json);
   }
 
   renderUserInfo(){
@@ -65,10 +65,6 @@ class User{
                  "bet": event.target.elements[1].value,
                  "bet_amount": event.target.elements[2].value}
 
-      // let category = event.target.elements[0].value
-      // let bet = event.target.elements[1].value
-      // let bet_amount = event.target.elements[2].value
-
       this.postBetToDB(respObj)
     })
 
@@ -76,9 +72,10 @@ class User{
     this.addMoneyForm.addEventListener('submit', (event)=>{
       event.preventDefault();
 
-      let respObj = {"addAmount": event.target.elements[0].value}
-      // let addAmount = event.target.elements[0].value
-      this.patchAddMoneyToDb(respObj)
+      let add_amount = event.target.elements[0].value;
+      let new_amount = this.money + add_amount;
+
+      this.patchMoneyToUser(new_amount)
     })
 
   }
@@ -128,100 +125,78 @@ class User{
   }
 
   addEnterBetListener() {
-    let enterBetButton = document.querySelectorAll("button.btn.btn-primary.enter-bet");
+    let enterBetButtons = document.querySelectorAll("button.btn.btn-primary.enter-bet");
 
-    for (var i = 0; i < enterBetButton.length; i++) {
-      let item = betButton[i]
-      item.addEventListener("click", (e) => {
-        let bet_number = e.target.value.split(",")
+    for (var i = 0; i < enterBetButtons.length; i++) {
+      let button = enterBetButtons[i]
+
+      button.addEventListener("click", (event) => {
+        let bet_number = event.target.value.split(",");
+
         this.enterBet(bet_number)
       })
+
     }
   }
 
   enterBet(bet_number) {
     let bet_amount = bet_number[1]
     let bet_id = bet_number[0]
-    let amount;
-    if(bet_amount < this.money) {
-      amount = this.money - bet_amount
-      let options = {
-        method: "PATCH",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "bet": {
-            "better_id": this.id // have to get thge user id
-          }
-        })
-      }
-      let userOption = {
 
-        method: "PATCH",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "user": {
-            "money": amount
-          }
-        })
-      }
-      fetch(`http://localhost:3000/bets/${bet_id}`, options)
-      fetch(`http://localhost:3000/users/${this.id}`, userOption)
+    if(bet_amount < this.money) {
+      let new_amount = this.money - bet_amount;
+
+      patchBetterToBet(this.id, bet_id)
+      patchMoneyToUser(new_amount)
 
     } else {
       alert("You don't have enough money to bet")
     }
   }
 
+// LEFT OFF HERE, CONTINUE CHECKING
 
+  renderBetsEngage(json){
+    let usersBets = this.bookie_bets.concat(this.better_bets)
 
-  renderBetsIn(json){
-    console.log("RenderBetsIn")
-  let arr = this.bookie_bets.concat(this.better_bets)
-
-    for ( let i = 0 ; i < arr.length; i ++){
-      let obj = arr[i];
-      let bet = obj.description;
+    for (let i = 0 ; i < arr.length; i ++){
+      let betObj = arr[i];
+      let bet = betObj.description;
       let bookie;
       let better;
       let bookieName;
       let betterName;
       let winnerName;
-      let bet_amount = obj.bet_amount;
-      let bet_identifier = `bookie_bet${obj.id}`;
+      let bet_amount = betObj.bet_amount;
+      let bet_identifier = `bookie_bet${betObj.id}`;
       let win_identifier = bet_identifier+",WIN";
       let lose_identifier = bet_identifier + ",LOSE";
 
-      if (obj.better_id == null){
+      if(betObj.better_id == null){
         bookieName = this.name;
         betterName = "No one accepted"
         winnerName = "--"
 
-      }else if (obj.better_id && obj.loser == null && obj.winner == null){
-        bookie = json.find(function(object){return object.id === obj.bookie_id})
+      }else if (betObj.better_id && betObj.loser == null && betObj.winner == null){
+        bookie = json.find(function(object){return object.id === betObj.bookie_id})
         bookieName = bookie.name
-        better = json.find(function(object){return object.id === obj.better_id})
+        better = json.find(function(object){return object.id === betObj.better_id})
         betterName = better.name
         winnerName = "--"
 
-      }else if (obj.better_id && obj.loser == null && obj.winner){
-        bookie = json.find(function(object){return object.id === obj.bookie_id})
+      }else if (betObj.better_id && betObj.loser == null && betObj.winner){
+        bookie = json.find(function(object){return object.id === betObj.bookie_id})
         bookieName = bookie.name
-        better = json.find(function(object){return object.id === obj.better_id})
+        better = json.find(function(object){return object.id === betObj.better_id})
         betterName = better.name
         winnerName = "Unresolved"
 
-      }else if (obj.better_id && obj.loser  && obj.winner){
-        bookie = json.find(function(object){return object.id === obj.bookie_id})
+      }else if (betObj.better_id && betObj.loser  && betObj.winner){
+        bookie = json.find(function(object){return object.id === betObj.bookie_id})
         bookieName = bookie.name
-        better = json.find(function(object){return object.id === obj.better_id})
+        better = json.find(function(object){return object.id === betObj.better_id})
         betterName = better.name
-        let winner = json.find(function(object){return object.id === obj.winner})
+        let winner = json.find(function(object){return object.id === betObj.winner})
         winnerName = winner.name
       }
 
@@ -248,8 +223,8 @@ class User{
               <p>${bet}</p>
               <hr>
               <p>Who was right?</p>
-              <button id="${win_identifier}" class="btn btn-primary winner" value= "${obj.id}" type="button">I was right. Now pay up.</button>
-              <button id="${lose_identifier}" class="btn btn-danger looser" value= "${obj.id}" type="button">They were right....take my money.</button>
+              <button id="${win_identifier}" class="btn btn-primary winner" value= "${betObj.id}" type="button">I was right. Now pay up.</button>
+              <button id="${lose_identifier}" class="btn btn-danger looser" value= "${betObj.id}" type="button">They were right....take my money.</button>
             </div>
           </div>
         </tr>`
@@ -257,12 +232,11 @@ class User{
         this.betsInTable.innerHTML += betRow
     }
     this.addWinnerListener()
-    this.addLooserListener()
+    this.addLoserListener()
   }
 
 
   addWinnerListener() {
-
     let betButton = document.querySelectorAll("button.btn.btn-primary.winner")
 
     for (var i = 0; i < betButton.length; i++) {
@@ -276,7 +250,7 @@ class User{
   }
 
 
-    addLooserListener() {
+    addLoserListener() {
 
       let betButton = document.querySelectorAll("button.btn.btn-danger.looser")
       console.log(betButton)
@@ -367,7 +341,7 @@ winner(json, winningAmount){
 
   postBetToDB({category, bet, bet_amount}){
     let options = {
-      method: method,
+      method: "POST",
       headers:{
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -381,16 +355,28 @@ winner(json, winningAmount){
     }
 
     fetch(`http://localhost:3000/bets`, options)
-    // fetch(`http://localhost:3000/users`)
-    //   .then(res=>res.json())
-    //   .then(json=>findUser(json, this.name)) ask johan about this !!!
   }
 
-  patchAddMoneyToDb({add_amount}){
-    let new_amount = this.money + add_amount;
-
+  patchBetterToBet(user_id, bet_id){
     let options = {
-      method: method,
+      method: "PATCH",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "bet": {
+          "better_id": user_id
+        }
+      })
+    }
+
+    fetch(`http://localhost:3000/bets/${bet_id}`, options)
+  }
+
+  patchMoneyToUser(new_amount){
+    let options = {
+      method: "PATCH",
       headers:{
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -402,5 +388,7 @@ winner(json, winningAmount){
 
     fetch(`http://localhost:3000/users/${this.id}`, options)
   }
+
+
 
 }
