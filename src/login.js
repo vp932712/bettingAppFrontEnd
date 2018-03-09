@@ -4,21 +4,16 @@ document.addEventListener("DOMContentLoaded", function(){
   $('#loginModal').modal('show');
 
   login.addEventListener('submit', (event)=>{
-    event.preventDefault()
+    event.preventDefault();
 
-    let userName = event.target.elements[0].value
-    renderUser(userName);
-
+    let username = event.target.elements[0].value
+    renderUser(username);
   })
 
-const renderUser = function(userName){
+  function renderUser(username){
     fetch(`http://localhost:3000/users`)
       .then(res=>res.json())
-      .then(json=>findUser(json, userName))
-  }
-
-  function fetchBets(){
-
+      .then(json=>findUser(json, username))
   }
 
   function findUser(json, name){
@@ -29,34 +24,13 @@ const renderUser = function(userName){
 
       let user = new User(userObj)
 
-      fetch(`http://localhost:3000/bets`)
-      .then(res=>res.json())
-      .then(json=>user.renderBets(json))
+      user.fetchData();
 
-
-      user.renderUserInfo();
-      user.fetchUsersInfo();
-
-
-
-
-
-
-      // fetch('http://localhost:3000/bets/')
-      //   .then(res=>res.json())
-      //   .then(json=>createBets(json, userObj.id))
 
     }else{
       alert("User Not Found")
       $('#loginModal').modal('show');
     }
   }
-  //
-  // function createBets(json, user_id){
-  //   let bets = new Bets(json, user_id)
-  //   bets.fetchUsersInfo();
-  // }
-
-
 
 })

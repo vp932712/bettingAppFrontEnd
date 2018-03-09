@@ -14,9 +14,32 @@ class User{
     this.betsAcceptedField = document.getElementById("betsAccCount")
     this.betsInTable = document.getElementById("betsIn")
     this.createBetForm = document.getElementById("createBet")
+    this.addMoneyForm = document.getElementById("addMoney")
     this.betsAvailTable = document.getElementById("betsAvail")
-    this.addEventListener();
 
+    // Paths
+    this.allUsersURL = 'http://localhost:3000/users'
+    this.allBetsURL = 'http://localhost:3000/bets'
+    this.userUrl = (user_id)=>{return `http://localhost:3000/users/${user_id}`}
+    this.betUrl = (bet_id)=>{return `http://localhost:3000/bets/${bet_id}`}
+
+  }
+
+  fetchData(){
+    fetch(`http://localhost:3000/users`)
+      .then(res=>res.json())
+      .then(json=>this.parseAndPopulate(json))
+  }
+
+  parseAndPopulate(json){
+    // Fills in user info box
+    this.renderUserInfo();
+
+    // Fills in Bets Availible table
+    this.renderBetsAvail();
+
+    // Fills in Bets Engaged in table
+    this.renderBetsEngage();
   }
 
   renderUserInfo(){
@@ -24,30 +47,76 @@ class User{
     this.availMoneyField.innerText = `$${this.money}`
     this.betsCreatedField.innerText = `${this.bookie_bets.length}`
     this.betsAcceptedField.innerText = `${this.better_bets.length}`
+
+    this.addCreateAndAddListeners();
   }
 
-   fetchUsersInfo(){
-    fetch(`http://localhost:3000/users`)
-      .then(res=>res.json())
-      .then(json=>this.renderBetsIn(json))
-  }
-
-  addEventListener(){
+  addCreateAndAddListeners(){
+    // Adds the Create Bet listener
     this.createBetForm.addEventListener('submit', (event)=>{
-      event.preventDefault()
+      event.preventDefault();
 
-      let category = event.target.elements[0].value
-      let bet = event.target.elements[1].value
-      let bet_amount = event.target.elements[2].value
+      let respObj = {"category": event.target.elements[0].value,
+                 "bet": event.target.elements[1].value,
+                 "bet_amount": event.target.elements[2].value}
 
-      this.postToDB(category, bet, bet_amount)
+      // let category = event.target.elements[0].value
+      // let bet = event.target.elements[1].value
+      // let bet_amount = event.target.elements[2].value
+
+      this.postToDB("POST", respObj)
     })
+
+    // Adds the Add Money listener
+    this.addMoneyForm.addEventListener('submit', (event)=>{
+      event.preventDefault();
+
+      let respObj = {"addAmount": event.target.elements[0].value}
+
+      // let addAmount = event.target.elements[0].value
+
+      this.postToDb("PATCH", respObj)
+    })
+
   }
+
+
+  postToDB(method, {category, bet, bet_amount, addAmount}){
+
+
+
+    let options = {
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "category": category,
+        "description": bet,
+        "bet_amount": bet_amount,
+        "bookie_id": this.id
+      })
+    }
+
+    fetch(`http://localhost:3000/bets`, options)
+    // fetch(`http://localhost:3000/users`)
+    //   .then(res=>res.json())
+    //   .then(json=>findUser(json, this.name)) ask johan about this !!!
+
+  }
+
+
+
+
 
   renderBets(betsData) {
     this.betsAvailTable.innerHTML = ""
+
       for (let i = 0; i < betsData.length; i++) {
-        if (betsData[i].better == null && betsData[i].bookie_id != this.id) {
+        let bet = betsData[i]
+
+        if (bet.better == null && bet.bookie_id != this.id) {
           // let category = betsData[i].category
           let bookie = betsData[i].bookie.name
           let bet_amount = betsData[i].bet_amount
@@ -316,7 +385,9 @@ winner(json, winningAmount){
 
 
 
-  postToDB(category, bet, bet_amount){
+  postToDB({category, bet, bet_amount, addAmount}){
+
+
     let options = {
       method: "POST",
       headers:{
